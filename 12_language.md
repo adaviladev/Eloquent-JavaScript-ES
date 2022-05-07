@@ -268,20 +268,19 @@ console.log(analizar("+(a, 10)"));
 
 {{index "error message"}}
 
-Funciona! No nos da información muy útil cuando falla
+¡Funciona! No nos da información muy útil cuando falla
 y no almacena la línea y la columna en que comienza cada expresión,
 lo que podría ser útil al informar errores más tarde, pero es lo
 suficientemente bueno para nuestros propósitos.
 
-## The evaluator
+## El evaluador
 
-{{index "evaluate function", evaluation, interpretation, "syntax tree", "Egg language"}}
+{{index "evaluar función", evaluación, interpretación, "árbol sintáctico", "lenguaje huevo"}}
 
-What can we do with the syntax tree for a program? Run it, of course!
-And that is what the evaluator does. You give it a syntax tree and a
-scope object that associates names with values, and it will evaluate
-the expression that the tree represents and return the value that this
-produces.
+¿Qué poddemos hacer son el árrbol sintáctico de un programa? ¡Correrlo, por supuesto!
+Y eso es lo que el evaluador hace. Le das un árbol sintáctico y un objeto de ámbito
+que asocie nombres con valores, y evaluará la expresión que el árbol representa y regresará
+el valor que el árbol produce.
 
 ```{includeCode: true}
 const specialForms = Object.create(null);
@@ -313,8 +312,9 @@ function evaluate(expresion, scope) {
 }
 ```
 
-{{index "literal expression", scope}}
+{{index "expresión literal", ámbito}}
 
+El evaluador tiene código para cada uno de los tipos de ((exprresión)).
 The evaluator has code for each of the ((expression)) types. A literal
 value expression produces its value. (For example, the expression
 `100` just evaluates to the number 100.) For a binding, we must check
