@@ -314,12 +314,10 @@ function evaluate(expresion, scope) {
 
 {{index "expresión literal", ámbito}}
 
-El evaluador tiene código para cada uno de los tipos de ((exprresión)).
-The evaluator has code for each of the ((expression)) types. A literal
-value expression produces its value. (For example, the expression
-`100` just evaluates to the number 100.) For a binding, we must check
-whether it is actually defined in the scope and, if it is, fetch the
-binding's value.
+El evaluador tiene código para cada uno de los tipos de ((exprresión)). Un
+expresión literal de un valor produce este valor. (Por ejemplo, la expresión `100` evalúa
+al número 100.) Para un vínculo de valor, debemos verificar si está definido en el ámbito,
+y si lo está, traer el valor vinculado.
 
 {{index [function, application]}}
 
@@ -819,6 +817,7 @@ console.log(parse("a # one\n   # two\n()"));
 //    operator: {type: "word", name: "a"},
 //    args: []}
 ```
+
 if}}
 
 {{hint
@@ -888,6 +887,7 @@ hacer(definir(x, 4),
 run(`set(quux, true)`);
 // → Some kind of ReferenceError
 ```
+
 if}}
 
 {{hint
