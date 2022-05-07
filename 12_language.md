@@ -331,32 +331,34 @@ Regresaremos a esto [más tardde](language#egg_fun), cuando forma especial llama
 `fun` está definida.
 
 
-{{index readability, "evaluate function", recursion, parsing}}
+{{index legibilidad, "evaluar función", recursión, parseo}}
 
-The recursive structure of `evaluate` resembles the similar structure
-of the parser, and both mirror the structure of the language itself.
-It would also be possible to integrate the parser with the evaluator
-and evaluate during parsing, but splitting them up this way makes the
-program clearer.
+La estructura recursiva de `evaluate` se parece a la estructura del parser, y
+ambos reflejan la estructura del lenguaje mismo. También sería posible
+integrar el parser con el evaluador y evaluar durante el parseo,
+pero separarlos de esta manera hace el programa más claro.
 
-{{index "Egg language", interpretation}}
 
-This is really all that is needed to interpret Egg. It is that simple.
-But without defining a few special forms and adding some useful values
-to the ((environment)), you can't do much with this language yet.
+{{index "lenguaje Egg", interpretación}}
 
-## Special forms
+Esto es todo lo que se necesita para interpretar Egg. Es así de simple.
+Pero si no definimos unas cuantas formas especiales y agregamos algunos
+valores útiles para el ((entorno)), todavía no podemos hacer mucho con
+el lenguaje.
 
-{{index "special form", "specialForms object"}}
+## Formas especiales
 
-The `specialForms` object is used to define special syntax in Egg. It
-associates words with functions that evaluate such forms. It is
-currently empty. Let's add `if`.
+{{index "formas especiales", "objeto specialForms"}}
+
+El objeto `specialForms` es usado para definir una sintaxis especial en
+Egg. Asocia palabras con funciones que evalúan estas formas. Ahora mismo está
+vacío. Agreguemos `if`.
+
 
 ```{includeCode: true}
-specialForms.si = (args, scope) => {
+specialForms.if = (args, scope) => {
   if (args.length != 3) {
-    throw new SyntaxError("Wrong number of args to si");
+    throw new SyntaxError("Wrong number of args to if");
   } else if (evaluate(args[0], scope) !== false) {
     return evaluate(args[1], scope);
   } else {
@@ -365,30 +367,30 @@ specialForms.si = (args, scope) => {
 };
 ```
 
-{{index "conditional execution", "ternary operator", "?: operator", "conditional operator"}}
+{{index "ejecución condicional", "operador ternario", "operador ?:", "operador condicional"}}
 
-Egg's `si` construct expects exactly three arguments. It will evaluate
-the first, and if the result isn't the value `false`, it will evaluate
-the second. Otherwise, the third gets evaluated. This `if` form is
-more similar to JavaScript's ternary `?:` operator than to
-JavaScript's `if`. It is an expression, not a statement, and it
-produces a value, namely the result of the second or third argument.
+El constructo `if` de Egg espera exactamente tres arrgumentos. Evaluará el primero,
+y si el resultado no es `false`, evaluará el segundo. En otro caso, el
+tercero será evaluado. Esta forma `if` es más parecidda al operaddor
+ternario `?:` que al `if` if de JavaScript. Es una expresión, no una
+sentencia, y produce un valor: el resultado del segundo o tercer argumento.
 
-{{index Boolean}}
+{{index Booleano}}
 
-Egg also differs from JavaScript in how it handles the condition value
-to `if`. It will not treat things like zero or the empty string as
-false, only the precise value `false`.
+Egg también se diferencia de JavaScript en como maneja el valor de la
+condición para `if`. No tratará cosas como cero o la cadena vacía como 
+falso, solamente el valor exacto `false`.
 
-{{index "short-circuit evaluation"}}
+{{index "evaluación en corto circuito"}}
 
-The reason we need to represent `if` as a special form, rather than a
-regular function, is that all arguments to functions are evaluated
-before the function is called, whereas `if` should evaluate only
-_either_ its second or its third argument, depending on the value of
-the first.
+La razón por la que necesitamos representar `if` como una forma especial,
+en vez de como una función regular, es que todos los argumentos de las
+funciones son evaluados antes de que la función sea llamada, mientras
+que el `if` debe evaluar solo el segundo _o_ el tercer argumento,
+dependiendo del valor del primero.
 
-The `while` form is similar.
+La forma `while` es similar.
+
 
 ```{includeCode: true}
 specialForms.while = (args, scope) => {
@@ -405,12 +407,13 @@ specialForms.while = (args, scope) => {
 };
 ```
 
-Another basic building block is `hacer`, which executes all its arguments
-from top to bottom. Its value is the value produced by the last
-argument.
+Otro bloque de construcción principal es `do`, que ejecuta todos sus argumentos
+de arriba hacia abajo. Su valos es el valorr producido por el último
+argumento.
+
 
 ```{includeCode: true}
-specialForms.hacer = (args, scope) => {
+specialForms.do = (args, scope) => {
   let value = false;
   for (let arg of args) {
     value = evaluate(arg, scope);
@@ -419,19 +422,20 @@ specialForms.hacer = (args, scope) => {
 };
 ```
 
-{{index "= operator"}}
+{{index "operador ="}}
 
-To be able to create ((binding))s and give them new values, we also
-create a form called `definir`. It expects a word as its first argument
-and an expression producing the value to assign to that word as its
-second argument. Since `definir`, like everything, is an expression, it
-must return a value. We'll make it return the value that was assigned
-(just like JavaScript's `=` operator).
+Para ser capaces de crear ((asignaciones)) y darle nuevos valores,
+además necesitamos crear una forma llamada `define`. Espera una palabra
+como prime argumento y una expresión producciendo un valor para asignar
+a esa palabra como segundo argumento. Ya que `define`, como todo,
+es una expresión, debe regresar un valor. Haremos que regrese el valor que
+fue asignado (justo como el operador `=` de JavaScript).
+
 
 ```{includeCode: true}
-specialForms.definir = (args, scope) => {
+specialForms.define = (args, scope) => {
   if (args.length != 2 || args[0].type != "word") {
-    throw new SyntaxError("Incorrect use of definir");
+    throw new SyntaxError("Incorrect use of define");
   }
   let value = evaluate(args[1], scope);
   scope[args[0].name] = value;
