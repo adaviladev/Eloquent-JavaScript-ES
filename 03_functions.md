@@ -96,7 +96,7 @@ Cuando el control se encuentre con tal declaración, inmediatamente salta de la
 función actual y devuelve el valor retornado al código que llamó
 la función. Una declaración `return` sin una expresión después de ella
 hace que la función retorne `undefined`. Funciones que no tienen una
-declaración `return` en absoluto, como `hacerSonido`, similarmente retornan
+declaración `return` en absoluto, como `hacerSonido`, de manera similar retornan
 `undefined`.
 
 {{index parameter, [function, application], [binding, "from parameter"]}}
@@ -110,10 +110,10 @@ el código en la función en sí.
 {{indexsee "top-level scope", "global scope"}}
 {{index "var keyword", "global scope", [binding, global], [binding, "scope of"]}}
 
-Cada ((vinculación)) tiene un _((alcace))_, que correspone a la parte del
+Cada ((vinculación)) tiene un _((alcace))_, que corresponde a la parte del
 programa en donde la vinculación es visible. Para vinculaciones definidas
 fuera de cualquier función o bloque, el alcance es todo el
-programa—puedes referir a estas vinculaciones en donde sea que quieras.
+programa, puedes referir a estas vinculaciones en donde sea que quieras.
 Estas son llamadas _globales_.
 
 {{index "local scope", [binding, local]}}
@@ -122,19 +122,19 @@ Pero las vinculaciones creadas como ((parámetro))s de función o declaradas
 dentro de una función solo puede ser referenciadas en esa función.
 Estas se llaman _locales_. Cada vez que se llame a la función, se crean
 nuevas instancias de estas vinculaciones. Esto proporciona cierto
-aislamiento entre funciones—cada llamada de función actúa sobre su pequeño
+aislamiento entre funciones, cada llamada de función actúa sobre su pequeño
 propio mundo (su entorno local), y a menudo puede ser entendida sin saber
 mucho acerca de lo qué está pasando en el entorno global.
 
 {{index "let keyword", "const keyword", "var keyword"}}
 
 Vinculaciones declaradas con `let` y `const` son, de hecho, locales al
-_((bloque))_ donde esten declarados, así que si creas uno de esas
+_((bloque))_ donde estén declarados, así que si creas uno de esas
 dentro de un ciclo, el código antes y después del ciclo no puede "verlas".
 En JavaScript anterior a 2015, solo las funciones creaban nuevos alcances,
 por lo que las vinculaciones de estilo-antiguo, creadas con la palabra clave
 `var`, son visibles a lo largo de toda la función en la que
-aparecen—o en todo el alcance global, si no están dentro de una función.
+aparecen, o en todo el alcance global, si no están dentro de una función.
 
 ```
 let x = 10;
@@ -153,7 +153,7 @@ console.log(x + z);
 
 Cada ((alcance)) puede "mirar afuera" hacia al alcance que lo rodee, por lo
 que `x` es visible dentro del bloque en el ejemplo. La excepción es cuando
-vinculaciones múltiples tienen el mismo nombre—en ese caso, el código solo
+vinculaciones múltiples tienen el mismo nombre, en ese caso, el código solo
 puede ver a la vinculación más interna. Por ejemplo, cuando el código
 dentro de la función `dividirEnDos` se refiera a `numero`,
 estara viendo su _propio_ `numero`, no el `numero` en el alcance global.
@@ -182,8 +182,8 @@ funciones, produciendo múltiples grados de localidad.
 
 {{index "landscape example"}}
 
-Por ejemplo, esta función—que muestra los ingredientes necesarios para
-hacer un lote de humus—tiene otra función dentro de ella:
+Por ejemplo, esta función, que muestra los ingredientes necesarios para
+hacer un lote de humus, tiene otra función dentro de ella:
 
 ```
 const humus = function(factor) {
@@ -212,7 +212,7 @@ de la función externa. Pero sus vinculaciones locales, como `unidad` o
 En resumen, cada alcance local puede ver también todos los alcances locales que
 lo contengan. El conjunto de vinculaciones visibles dentro de un bloque
 está determinado por el lugar de ese bloque en el texto del programa.
-Cada alcance local puede tambien ver todos los alcances locales que lo
+Cada alcance local puede también ver todos los alcances locales que lo
 contengan, y todos los alcances pueden ver el alcance global.
 Este enfoque para la visibilidad de vinculaciones es
 llamado _((alcance léxico))_.
@@ -228,7 +228,7 @@ y nunca cambia. Esto hace que sea fácil confundir la función con su nombre.
 {{index [binding, assignment]}}
 
 Pero los dos son diferentes. Un valor de función puede hacer todas las cosas que
-otros valores pueden hacer—puedes usarlo en ((expresion))es arbitrarias, no
+otros valores pueden hacer, puedes usarlo en ((expresion))es arbitrarias, no
 solo llamarlo. Es posible almacenar un valor de función en una nueva
 vinculación, pasarla como argumento a una función, y así sucesivamente.
 Del mismo modo, una vinculación que contenga una función sigue siendo solo
@@ -443,7 +443,7 @@ que puedes pasar a una función. Si pasa demasiados, los adicionales son
 ignorados. Si pasas muy pocos, a los parámetros faltantes se les asigna el valor
 `undefined`.
 
-La desventaja de esto es que es posible—incluso probable—que
+La desventaja de esto es que es posible, incluso probable, que
 accidentalmente pases la cantidad incorrecta de argumentos a las funciones.
 Y nadie te dira nada acerca de eso.
 
@@ -497,7 +497,7 @@ En el [próximo capítulo](datos#parametros_rest), veremos una forma en el
 que el cuerpo de una función puede obtener una lista de todos los argumentos
 que son pasados. Esto es útil porque hace posible que una función
 acepte cualquier cantidad de argumentos. Por ejemplo, `console.log` hace
-esto—muetra en la consola todos los valores que se le den.
+esto, muetra en la consola todos los valores que se le den.
 
 ```
 console.log("C", "O", 2);
@@ -532,14 +532,14 @@ console.log(envolver2());
 // → 2
 ```
 
-Esto está permitido y funciona como es de esperar—ambas instancias de
+Esto está permitido y funciona como es de esperar, ambas instancias de
 las vinculaciones todavía pueden ser accedidas. Esta situación es una buena
 demostración del hecho de que las vinculaciones locales se crean de nuevo para
 cada llamada, y que las diferentes llamadas no pueden pisotear las
 distintas vinculaciones locales entre sí.
 
-Esta característica—poder hacer referencia a una instancia específica
-de una vinculación local en un alcance encerrado—se llama _((cierre))_.
+Esta característica, poder hacer referencia a una instancia específica
+de una vinculación local en un alcance encerrado, se llama _((cierre))_.
 Una función que que hace referencia a vinculaciones de alcances locales
 alrededor de ella es llamada _un_ cierre.
 Este comportamiento no solo te libera de tener que preocuparte
@@ -640,10 +640,10 @@ paralizante.
 {{index "premature optimization"}}
 
 Por lo tanto, siempre comienza escribiendo algo que sea correcto y fácil de
-comprender. Si te preocupa que sea demasiado lento—lo que generalmente
+comprender. Si te preocupa que sea demasiado lento, lo que generalmente
 no sucede, ya que la mayoría del código simplemente no se ejecuta con la
 suficiente frecuencia como para tomar cantidades significativas de
-tiempo—puedes medir luego y mejorar si es necesario.
+tiempo, puedes medir luego y mejorar si es necesario.
 
 {{index "branching recursion"}}
 
@@ -743,7 +743,7 @@ aún más para explorar _cada_ solución continuada que produzca un número meno
 o igual a el número objetivo. Como no encuentra uno que llegue al objetivo,
 retorna `null` a la primera llamada. Ahí el operador `||` genera la llamada
 que explora `(1 * 3)` para que esta suceda. Esta búsqueda tiene más
-suerte—su primera llamada recursiva, a través de _otra_ llamada recursiva,
+suerte, su primera llamada recursiva, a través de _otra_ llamada recursiva,
 encuentra al número objetivo. Esa llamada más interna retorna un string, y
 cada uno de los operadores `||` en las llamadas intermedias pasa ese string
 a lo largo, en última instancia retornando la solución.
@@ -787,7 +787,7 @@ siempre tengan tres dígitos de largo.
 011 Pollos
 ```
 
-Esto pide una función de dos argumentos—el numero de vacas y el numero
+Esto pide una función de dos argumentos, el numero de vacas y el numero
 de pollos. Vamos a programar.
 
 ```
@@ -844,8 +844,8 @@ imprimirInventarioGranja(7, 11, 3);
 {{index [function, naming]}}
 
 Funciona! Pero ese nombre, `imprimirEtiquetaAlcochadaConCeros`, es un poco
-incómodo. Combina tres cosas—impresión, alcochar con ceros y añadir
-una etiqueta—en una sola función.
+incómodo. Combina tres cosas, impresión, alcochar con ceros y añadir
+una etiqueta, en una sola función.
 
 {{index "zeroPad function"}}
 
@@ -890,7 +890,7 @@ relleno con diferentes caracteres, y así sucesivamente.
 Un principio útil es no agregar mucho ingenio a menos que estes absolutamente
 seguro de que lo vas a necesitar. Puede ser tentador escribir "((framework))s"
 generalizados para cada funcionalidad que encuentres.
-Resiste ese impulso. No realizarás ningún trabajo real de esta manera—solo
+Resiste ese impulso. No realizarás ningún trabajo real de esta manera, solo
 estarás escribiendo código que nunca usarás.
 
 {{id pure}}
@@ -917,7 +917,7 @@ secundarios.
 
 Una función _pura_ es un tipo específico de función de producción-de-valores
 que no solo no tiene efectos secundarios pero que tampoco depende de los
-efectos secundarios de otro código—por ejemplo, no lee vinculaciones globales
+efectos secundarios de otro código, por ejemplo, no lee vinculaciones globales
 cuyos valores puedan cambiar. Una función pura tiene la propiedad agradable
 de que cuando se le llama con los mismos argumentos, siempre produce el
 mismo valor (y no hace nada más). Una llamada a tal función puede ser
@@ -964,7 +964,7 @@ Un aspecto clave en para comprender a las funciones es comprender los alcances. 
 bloque crea un nuevo alcance. Los parámetros y vinculaciones declaradas en
 un determinado alcance son locales y no son visibles desde el exterior.
 Vinculaciones declaradas con `var` se comportan de manera
-diferente—terminan en el alcance de la función más cercana o en el alcance global.
+diferente, terminan en el alcance de la función más cercana o en el alcance global.
 
 Separar las tareas que realiza tu programa en diferentes funciones es
 util. No tendrás que repetirte tanto, y las funciones pueden

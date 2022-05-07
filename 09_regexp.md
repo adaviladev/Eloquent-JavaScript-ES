@@ -1427,7 +1427,7 @@ delante del ((exponente)), se puede hacer con `[+\-]?` o `(\+|-|)`
 {{index "pipe character"}}
 
 La parte más complicada del ejercicio es el problema hacer coincidir
-ambos `"5."` y `".5"` sin tambien coincidir coincidir con `"."`. Para esto,
+ambos `"5."` y `".5"` sin también coincidir coincidir con `"."`. Para esto,
 una buena solución es usar el operador `|` para separar los dos casos—ya sea
 uno o más dígitos seguidos opcionalmente por un punto y cero o más
 dígitos _o_ un punto seguido de uno o más dígitos.

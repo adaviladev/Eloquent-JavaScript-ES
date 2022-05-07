@@ -4,14 +4,14 @@
 
 Y mi corazón brilla de un color rojo brillante bajo mi piel transparente y
 translúcida, y tienen que administrarme 10cc de JavaScript para conseguir que
-regrese. (respondo bien a las toxinas en la sangre.) Hombre, esa cosa es
-increible!
+regrese. (respondo bien a las toxinas en la sangre.) ¡Hombre, esa cosa es
+increíble!
 
 quote}}
 
 {{index why, "Poignant Guide"}}
 
-{{figure {url: "img/chapter_picture_2.jpg", alt: "Foto de tentaculos sosteniendo objetos", chapter: framed}}}
+{{figure {url: "img/chapter_picture_2.jpg", alt: "Foto de tentáculos sosteniendo objetos", chapter: framed}}}
 
 En este capítulo, comenzaremos a hacer cosas que realmente se pueden llamar
 _programación_. Expandiremos nuestro dominio del lenguaje JavaScript
@@ -64,8 +64,8 @@ ella. Esto es un programa:
 Sin embargo, es un programa inútil. Una ((expresión)) puede estar feliz solo con
 producir un valor, que luego pueda ser utilizado por el código circundante. Una
 ((declaración)) es independiente por si misma, por lo que equivale a
-algo solo si afecta al mundo. Podría mostrar algo en la pantalla—eso
-cuenta como cambiar el mundo—o podría cambiar el estado interno de
+algo solo si afecta al mundo. Podría mostrar algo en la pantalla, eso
+cuenta como cambiar el mundo, o podría cambiar el estado interno de
 la máquina en una manera que afectará a las declaraciones que vengan después de
 ella. Estos cambios se llaman _((efecto secundario))s_. Las declaraciones en el
 ejemplo anterior solo producen los valores `1` y `true` y luego
@@ -138,7 +138,7 @@ console.log(humor);
 {{index [binding, "model of"], "tentacle (analogy)"}}
 
 Deberías imaginar a las vinculaciones como tentáculos, en lugar de cajas.
-Ellas no _contienen_ valores; ellas los _agarran_—dos vinculaciones pueden
+Ellas no _contienen_ valores; ellas los _agarran_, dos vinculaciones pueden
 referirse al mismo valor. Un programa solo puede acceder a los valores que
 todavía pueda referenciar. Cuando necesitas recordar algo, creces un
 tentáculo para aferrarte a él o vuelves a conectar uno de tus tentáculos
@@ -202,8 +202,8 @@ fácilmente puedas consultarlo más adelante.
 {{index "underscore character", "dollar sign", [binding, naming]}}
 
 Los nombres de las vinculaciones pueden ser cualquier palabra. Los dígitos pueden
-ser parte de los nombres de las vinculaciones pueden—`catch22` es un nombre
-válido, por ejemplo—pero el nombre no debe comenzar con un dígito.
+ser parte de los nombres de las vinculaciones pueden, `catch22` es un nombre
+válido, por ejemplo, pero el nombre no debe comenzar con un dígito.
 El nombre de una vinculación puede incluir signos de dólar (`$`) o
 caracteres de subrayado (`_`), pero no otros signos de puntuación o
 caracteres especiales.
@@ -262,7 +262,7 @@ prompt("Introducir contraseña");
 
 {{index parameter, [function, application]}}
 
-Ejecutar una función tambien se conoce como _invocarla_, _llamarla_, o
+Ejecutar una función también se conoce como _invocarla_, _llamarla_, o
 _aplicarla_. Puedes llamar a una función poniendo ((paréntesis)) después de una
 expresión que produzca un valor de función. Usualmente usarás directamente
 el nombre de la vinculación que contenga la función. Los valores entre
@@ -592,7 +592,7 @@ el ciclo continúa dando vueltas hasta que proporciones un nombre no-vacío.
 {{index "code structure", whitespace, "programming style"}}
 
 En los ejemplos, he estado agregando espacios adelante de declaraciones que
-son parte de una declaración más grande. Estos no son necesarios—la computadora
+son parte de una declaración más grande. Estos no son necesarios, la computadora
 aceptará el programa normalmente sin ellos. De hecho, incluso las nuevas
 ((líneas)) en los programas son opcionales. Podrías escribir un
 programa en una sola línea inmensa si asi quisieras.
@@ -602,7 +602,7 @@ la estructura del código se destaque. En código donde se abren nuevos bloques
 dentro de otros bloques, puede ser difícil ver dónde termina un bloque
 y donde comienza el otro. Con la indentación apropiada, la forma visual de un
 programa corresponde a la forma de los bloques dentro de él. Me gusta
-usar dos espacios para cada bloque abierto, pero los gustos varían—algunas
+usar dos espacios para cada bloque abierto, pero los gustos varían, algunas
 personas usan cuatro espacios, y algunas personas usan
 ((carácteres de tabulación)). Lo cosa importante es que cada bloque
 nuevo agregue la misma cantidad de espacio.
@@ -779,7 +779,7 @@ else accionPorDefault();
 Existe un constructo llamado `switch` que está destinada a expresar tales
 "despachos" de una manera más directa. Desafortunadamente, la sintaxis que
 JavaScript usa para esto (que heredó de la línea lenguajes de programación
-C/Java) es algo incómoda—una cadena de declaraciones `if` podria llegar a verse
+C/Java) es algo incómoda, una cadena de declaraciones `if` podria llegar a verse
 mejor. Aquí hay un ejemplo:
 
 ```
@@ -807,7 +807,7 @@ encuentra ningún valor que coincida. Continuará ejecutándose, incluso a
 través de otras etiquetas, hasta que llegue a una declaración `break`.
 En algunos casos, como en el caso `"soleado"` del ejemplo, esto se puede usar
 para compartir algo de código entre casos (recomienda salir para ambos
-climas soleado y nublado). Pero ten cuidado—es fácil olvidarse de
+climas soleado y nublado). Pero ten cuidado, es fácil olvidarse de
 `break`, lo que hará que el programa ejecute código que no quieres que sea
 ejecutado.
 

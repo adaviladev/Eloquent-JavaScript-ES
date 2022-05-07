@@ -203,7 +203,7 @@ tipo de ciclo, y luego provee un cuerpo. Sin embargo, el cuerpo ahora está escr
 como un valor de función, que está envuelto en el ((paréntesis)) de la
 llamada a `repetir`. Por eso es que tiene que cerrarse con el corchete de cierre
 _y_ paréntesis de cierre. En casos como este ejemplo, donde el
-cuerpo es una expresión pequeña y única, podrias tambien omitir las
+cuerpo es una expresión pequeña y única, podrias también omitir las
 llaves y escribir el ciclo en una sola línea.
 
 ## Funciones de orden superior

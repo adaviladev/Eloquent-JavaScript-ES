@@ -456,8 +456,8 @@ otro entorno en donde programar JavaScript.
 A lo largo del libro, hay cinco _capítulos de proyectos_, que describen
 programas de ejemplo más grandes para darte una idea de la programación real. En
 orden de aparición, trabajaremos en la construcción de un
-[robot de delivery](robot), un [lenguaje de programación](lenguaje),
-un [juego de plataforma](juego), un [programa de paint](paint) y un [sitio web dinámico](skillsharing).
+[robot de entrega](robot), un [lenguaje de programación](lenguaje),
+un [juego de plataforma](juego), un [programa de pintura](paint) y un [sitio web dinámico](skillsharing).
 
 La parte del lenguaje del libro comienza con cuatro capítulos para presentar
 la estructura básica del lenguaje de JavaScript. Estos introducen

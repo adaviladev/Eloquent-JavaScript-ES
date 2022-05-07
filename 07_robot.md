@@ -162,7 +162,7 @@ si no, retorna el estado anterior, ya que este no es un movimiento válido.
 Luego crea un nuevo estado con el destino como el nuevo lugar del robot.
 Pero también necesita crear un nuevo conjunto de paquetes—los paquetes que
 el robot esta llevando (que están en el lugar actual del robot) necesitan de
-moverse tambien al nuevo lugar. Y paquetes que están dirigidos al nuevo
+moverse también al nuevo lugar. Y paquetes que están dirigidos al nuevo
 lugar donde deben de ser entregados—es decir, deben de eliminarse del
 conjunto de paquetes no entregados. La llamada a `map` se encarga de mover
 los paquetes, y la llamada a `filter` hace la entrega.

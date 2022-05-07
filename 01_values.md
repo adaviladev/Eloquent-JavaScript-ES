@@ -51,7 +51,7 @@ Entonces ese es el número binario 00001101, o 8 + 4 + 1, o 13.
 
 {{index memory, "volatile data storage", "hard drive"}}
 
-Imagina un mar de bits—un océano de ellos. Una computadora moderna
+Imagina un mar de bits, un océano repleto. Una computadora moderna
 promedio tiene mas de 30 billones de bits en su almacenamiento de datos
 volátiles (memoria funcional). El almacenamiento no volátil
 (disco duro o equivalente) tiende a tener unas cuantas mas ordenes de magnitud.
@@ -93,18 +93,18 @@ En un programa hecho en JavaScript, se escriben de la siguiente manera:
 
 {{index "binary number"}}
 
-Utiliza eso en un programa, y ocasionara que el patron de bits
+Utiliza eso en un programa, y ocasionará que el patrón de bits
 que representa el número 13 sea creado dentro de la memoria de la computadora.
 
-{{index [number, representation], bit}}
+{{index [number, representación], bit}}
 
-JavaScript utiliza un número fijo de bits, específicamente 64 de ellos,
+JavaScript utiliza un número fijo de bits, específicamente 64,
 para almacenar un solo valor numérico. Solo existen una cantidad finita de
 patrones que podemos crear con 64 bits, lo que significa que la cantidad de
 números diferentes que pueden ser representados es limitada. Para una
 cantidad de _N_ dígitos decimales, la cantidad de números que pueden ser
 representados es 10^N^. Del mismo modo, dados 64 dígitos binarios, podemos
-representar 2^64^ números diferentes, lo que es alrededor de 18 mil trillones
+representar 2^64^ números diferentes, lo que es alrededor de 18 trillones
 (un 18 con 18 ceros más). Eso es muchísimo.
 
 La memoria de un computador solía ser mucho mas pequeña que en la actualidad,
@@ -118,14 +118,13 @@ con números verdaderamente astronómicos.
 
 {{index sign, "floating-point number", "fractional number", "sign bit"}}
 
-A pesar de esto, no todos los números enteros por debajo de 18 mil
+A pesar de esto, no todos los números enteros por debajo de 18
 trillones caben en un número de JavaScript. Esos bits también almacenan
 números negativos, por lo que un bit indica el signo de un número. Un problema
 mayor es que los números no enteros tienen que ser representados también.
 Para hacer esto, algunos de los bits son usados para almacenar la posición
 del punto decimal. El número entero mas grande que puede ser
-almacenado está en el rango de los 9 trillones (15 ceros)—lo cual es
-todavía placenteramente inmenso.
+almacenado está en el rango de los nueve mil billones (15 ceros), que sigue siendo inmenso.
 
 {{index [number, notation]}}
 
@@ -150,8 +149,8 @@ Eso es 2.998 × 10^8^ = 299,800,000.
 {{index pi, [number, "precision of"], "floating-point number"}}
 
 Los cálculos con números enteros (también llamados _((integer))s_)
-mas pequeños a los 9 trillones anteriormente mencionados están
-garantizados a ser siempre precisos. Desafortunadamente, los calculos
+mas pequeños a los nueve mil billones anteriormente mencionados están
+garantizados a ser siempre precisos. Desafortunadamente, los cálculos
 con números fraccionarios, generalmente no lo son. Así como π (pi) no puede
 ser precisamente expresado por un número finito de números decimales,
 muchos números pierden algo de precisión cuando solo hay 64 bits disponibles
@@ -202,17 +201,17 @@ El operador `/` tiene la misma precedencia que `*`. Lo mismo aplica para
 del otro, como en `1 - 2 + 1`, estos se aplican de izquierda a derecha:
 `(1 - 2) + 1`.
 
-Estas reglas de precedencia no son algo de lo que deberias preocuparte.
+Estas reglas de precedencia no son algo de lo que deberías preocuparte.
 Cuando tengas dudas, solo agrega un paréntesis.
 
-{{index "modulo operator", division, "remainder operator", "% operator"}}
+{{index "operador módulo", división, "operador de sobrante", "operador %"}}
 
 Existe otro operador aritmético que quizás no reconozcas inmediatamente.
 El símbolo `%` es utilizado para representar la operación de _residuo_.
 `X % Y` es el residuo de dividir `X` entre `Y`. Por ejemplo, `314 % 100`
 produce `14`, y `144 % 12` produce `0`. La precedencia del residuo es la
 la misma que la de la multiplicación y la división. Frecuentemente veras
-que este operador es tambien conocido como _modulo_.
+que este operador es también conocido como _modulo_.
 
 ### Números especiales
 
@@ -245,8 +244,8 @@ significante.
 
 {{index syntax, text, character, [string, notation], "single-quote character", "double-quote character", "quotation mark", backtick}}
 
-El próximo tipo de dato básico es el _((string))_. Los Strings
-son usados para representar texto. Son escritos encerrando su contenido
+El próximo tipo de dato básico es el _((string))_. Las cadenas (_strings_)
+son usados para representar texto. Son escritas encerrando su contenido
 en comillas:
 
 ```
@@ -264,7 +263,7 @@ y al final coincidan.
 Casi todo puede ser colocado entre comillas, y JavaScript construirá
 un valor string a partir de ello. Pero algunos caracteres son mas difíciles.
 Te puedes imaginar que colocar comillas entre comillas podría ser difícil.
-Los _Newlines_ (los caracteres que obtienes cuando presionas la tecla de Enter)
+Los _saltos de línea_ (los caracteres que obtienes cuando presionas la tecla de Enter)
 solo pueden ser incluidos cuando el string está encapsulado con comillas
 invertidas (`` ` ``).
 
@@ -307,8 +306,8 @@ Un carácter de salto de linea es escrito así: \"\\n\"."
 
 {{index [string, representation], Unicode, character}}
 
-También los strings deben de ser modelados como una serie de bits para poder
-existir dentro del computador. La forma en la que JavaScript hace esto
+Las cadenas deben de ser modeladas como una serie de bits para poder
+existir dentro de la computadora. La forma en la que JavaScript hace esto
 es basada en el estándar _((Unicode))_. Este estándar asigna un número a
 todo carácter que alguna vez pudieras necesitar, incluyendo caracteres en
 Griego, Árabe, Japones, Armenio, y asi sucesivamente. Si tenemos un número para
@@ -327,9 +326,9 @@ tema en el [Capitulo 5](orden_superior#unidades_de_codigo).
 
 {{index "+ operator", concatenation}}
 
-Los strings no pueden ser divididos, multiplicados, o substraidos, pero
-el operador `+` _puede_ ser utilizado en ellos. No los agrega, sino que
-los _concatena_—pega dos strings juntos. La siguiente línea producirá
+Los strings no pueden ser divididas, multiplicados o restados, pero
+el operador `+` _puede_ ser utilizado en ellos. No los suma, sino que
+los _concatena_: pega dos cadenas una tras otra. La siguiente línea producirá
 el string `"concatenar"`:
 
 ```
@@ -343,10 +342,10 @@ a estas en el [Capítulo 4](datos#metodos).
 {{index interpolation, backtick}}
 
 Los strings escritos con comillas simples o dobles se comportan
-casi de la misma manera—La unica diferencia es el tipo de comilla que necesitamos
+casi de la misma manera—La única diferencia es el tipo de comilla que necesitamos
 para escapar dentro de ellos. Los strings de comillas inversas, usualmente
 llamados _((plantillas literales))_, pueden realizar algunos trucos
-más. Mas alla de permitir saltos de lineas, pueden también incrustar otros
+más. Mas allá de permitir salto de línea, pueden también incrustar otros
 valores.
 
 ```
@@ -361,7 +360,7 @@ posición. El ejemplo anterior produce "_la mitad de 100 es 50_".
 
 {{index operator, "typeof operator", type}}
 
-No todo los operadores son simbolos. Algunos se escriben como palabras.
+No todo los operadores son símbolos. Algunos se escriben como palabras.
 Un ejemplo es el operador `typeof`, que produce un string con el nombre
 del tipo de valor que le demos.
 
@@ -404,7 +403,7 @@ true (verdadero) y false (falso) que se escriben de la misma forma.
 
 ### Comparación
 
-{{index comparison}}
+{{index comparación}}
 
 Aquí se muestra una forma de producir valores Booleanos:
 
@@ -415,7 +414,7 @@ console.log(3 < 2)
 // → false
 ```
 
-{{index [comparison, "of numbers"], "> operator", "< operator", "greater than", "less than"}}
+{{index [comparación, "de números"], "> operador", "< operator", "greater than", "less than"}}
 
 Los signos `>` y `<` son tradicionalmente símbolos para "mayor que"
 y "menor que", respectivamente. Ambos son operadores binarios.
@@ -439,7 +438,7 @@ incluidos en el ordenamiento. Cuando comparamos strings, JavaScript evalúa
 los caracteres  de izquierda a derecha, comparando los códigos ((Unicode))
 uno por uno.
 
-{{index equality, ">= operator", "<= operator", "== operator", "!= operator"}}
+{{index igualdad, "operador >=", "operador <=", "operador ==", "operador !="}}
 
 Otros operadores similares son `>=` (mayor o igual que), `<=` (menor o igual que),
 `==` (igual a), y `!=` (no igual a).

@@ -466,7 +466,7 @@ por vencida.
 
 {{index "Promise class", "callback function", interface}}
 
-Y, como hemos establecido que las promesas son algo bueno, tambien haremos
+Y, como hemos establecido que las promesas son algo bueno, también haremos
 que nuestra función de solicitud retorne una promesa. En
 términos de lo que pueden expresar, las devoluciones de llamada y las promesas
 son equivalentes. Las funciones basadas en devoluciones de llamadas se pueden
