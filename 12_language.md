@@ -275,7 +275,7 @@ suficientemente bueno para nuestros propósitos.
 
 ## El evaluador
 
-{{index "evaluar función", evaluación, interpretación, "árbol sintáctico", "lenguaje huevo"}}
+{{index "evaluar función", evaluación, interpretación, "árbol sintáctico", "lenguaje de Egg"}}
 
 ¿Qué poddemos hacer son el árrbol sintáctico de un programa? ¡Correrlo, por supuesto!
 Y eso es lo que el evaluador hace. Le das un árbol sintáctico y un objeto de ámbito
@@ -319,17 +319,17 @@ expresión literal de un valor produce este valor. (Por ejemplo, la expresión `
 al número 100.) Para un vínculo de valor, debemos verificar si está definido en el ámbito,
 y si lo está, traer el valor vinculado.
 
-{{index [function, application]}}
+{{index [función, aplicación]}}
 
-Applications are more involved. If they are a ((special form)), like
-`if`, we do not evaluate anything and pass the argument expressions,
-along with the scope, to the function that handles this form. If it is
-a normal call, we evaluate the operator, verify that it is a function,
-and call it with the evaluated arguments.
+La apliación implica más cosas. Si son una ((forma especial)), como
+`if`, no evaluamos nada y pasamos las expresiones argumento, junto con el
+ámbito, a la función que maneja esta forma. Si es una llamada normal, evaluamos el operador,
+verificamos que sea una función, y la llamamos con los argumentos evaluados.
 
-We use plain JavaScript function values to represent Egg's function
-values. We will come back to this [later](language#egg_fun), when the
-special form called `fun` is defined.
+Usamos valores función planos de JavaScript para representar los valores función de Egg.
+Regresaremos a esto [más tardde](language#egg_fun), cuando forma especial llamada
+`fun` está definida.
+
 
 {{index readability, "evaluate function", recursion, parsing}}
 
