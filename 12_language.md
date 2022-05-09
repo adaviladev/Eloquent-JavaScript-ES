@@ -196,7 +196,7 @@ JavaScript no válido.
 
 {{index "parseApply function"}}
 
-Luego cortamos la parte que coincidio del string del programa y
+Luego cortamos la parte que coincidió del string del programa y
 pasamos eso, junto con el objeto para la expresión, a `aplicarAnalisis`,
 el cual verifica si la expresión es una aplicación. Si es así,
 analiza una lista de los argumentos entre paréntesis.
@@ -443,9 +443,9 @@ specialForms.define = (args, scope) => {
 };
 ```
 
-## The environment
+## El entorno
 
-{{index "Egg language", "evaluate function"}}
+{{index "lenguaje Egg", "evaluar función"}}
 
 The ((scope)) accepted by `evaluate` is an object with properties
 whose names correspond to binding names and whose values correspond to
@@ -572,22 +572,22 @@ specialForms.fun = (args, scope) => {
 };
 ```
 
-{{index "local scope"}}
+{{index "ámbito local"}}
 
-Functions in Egg get their own local scope. The function produced by
-the `fun` form creates this local scope and adds the argument bindings
-to it. It then evaluates the function body in this scope and returns
-the result.
+Las funciones en Egg tienen su propio ámbito local. La función producida
+por la forma `fun` crea este entorno local y agrega las asociaciones de
+argumentos a este. Entonces evalúa el cuerpo de la función en este ámbito
+y regresa el resultado.
 
 ```{startCode: true}
 run(`
-hacer(definir(plusOne, fun(a, +(a, 1))),
+do(define(plusOne, fun(a, +(a, 1))),
    imprimir(plusOne(10)))
 `);
 // → 11
 
 run(`
-hacer(definir(pow, fun(base, exp,
+do(define(pow, fun(base, exp,
      si(==(exp, 0),
         1,
         *(base, pow(base, -(exp, 1)))))),
@@ -713,14 +713,14 @@ topScope.length = "...";
 topScope.element = "...";
 
 run(`
-hacer(definir(sum, fun(array,
-     hacer(definir(i, 0),
-        definir(sum, 0),
+do(define(sum, fun(array,
+     do(define(i, 0),
+        define(sum, 0),
         while(<(i, length(array)),
-          hacer(definir(sum, +(sum, element(array, i))),
-             definir(i, +(i, 1)))),
+          do(define(sum, +(sum, element(array, i))),
+             define(i, +(i, 1)))),
         sum))),
-   imprimir(sum(array(1, 2, 3))))
+   print(sum(array(1, 2, 3))))
 `);
 // → 6
 ```
@@ -758,8 +758,8 @@ binding `a`.
 
 ```
 run(`
-hacer(definir(f, fun(a, fun(b, +(a, b)))),
-   imprimir(f(4)(5)))
+do(define(f, fun(a, fun(b, +(a, b)))),
+   print(f(4)(5)))
 `);
 // → 9
 ```
