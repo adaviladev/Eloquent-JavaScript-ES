@@ -447,15 +447,14 @@ specialForms.define = (args, scope) => {
 
 {{index "lenguaje Egg", "evaluar función"}}
 
-The ((scope)) accepted by `evaluate` is an object with properties
-whose names correspond to binding names and whose values correspond to
-the values those ((binding))s are bound to. Let's define an object to
-represent the ((global scope)).
+El ((ámbito)) aceptado por `evaluate` es un objeto con propiedades
+de las que sus nombres corresponden a los nombres de las vinculaciones en el ámbito
+y sus valores corresnponden a los valores de esos vínculos. Ahora definamos un objeto
+para representar el ((ámbito global)).
 
-To be able to use the `if` construct we just defined, we must have
-access to ((Boolean)) values. Since there are only two Boolean values,
-we do not need special syntax for them. We simply bind two names to
-the values `true` and `false` and use those.
+Para poder usar el constructo `if` que acabamos de definir, necesitamos acceder
+a valores ((Booleano))s. Como solo hay dos valores Booleanos, no necesitamos una sintaxis
+especial. Simplemente asociaremos dos nombres a los valores `true` y `false` y usaremos estos nombres.
 
 ```{includeCode: true}
 const topScope = Object.create(null);
@@ -464,21 +463,21 @@ topScope.true = true;
 topScope.false = false;
 ```
 
-We can now evaluate a simple expression that negates a Boolean value.
+Podemos evaluar una expresión simple que niegue un Booleano.
 
 ```
-let prog = parse(`si(true, false, true)`);
+let prog = parse(`if(true, false, true)`);
 console.log(evaluate(prog, topScope));
 // → false
 ```
 
-{{index arithmetic, "Function constructor"}}
+{{index aritmética, "constructor de Función"}}
 
-To supply basic ((arithmetic)) and ((comparison)) ((operator))s, we
-will also add some function values to the ((scope)). In the interest
-of keeping the code short, we'll use `Function` to synthesize a bunch
-of operator functions in a loop, instead of defining them
-individually.
+Para proveer la ((aritmética)) y ((operador))es de ((comparación)),
+necesitamos además añadir algunas funciones al ((ámbito)). Para mantener
+el código peequeño, usaremos `Function` para sintetizar varias
+funciones de operador en un ciclo, en vez de definirlas individualmente.
+
 
 ```{includeCode: true}
 for (let op of ["+", "-", "*", "/", "==", "<", ">"]) {
@@ -486,65 +485,69 @@ for (let op of ["+", "-", "*", "/", "==", "<", ">"]) {
 }
 ```
 
-A way to ((output)) values is also very useful, so we'll wrap
-`console.log` in a function and call it `imprimir`.
+Tener una manera de ((devolver)) valores tambbién es muy útil,
+así que envolveremos `console.log` en una función y la llamaremos
+`print`.
 
 ```{includeCode: true}
-topScope.imprimir = value => {
+topScope.print = value => {
   console.log(value);
   return value;
 };
 ```
 
-{{index parsing, "run function"}}
+{{index parseo, "función run"}}
 
-That gives us enough elementary tools to write simple programs. The
-following function provides a convenient way to parse a program and
-run it in a fresh scope.
+Esto nos da suficientes herramientas elementales para escribir
+programas simples. La siguiente función provee una forma conveniente
+de leer un programa y correrlo en un ámbito nuevo.
+
 
 ```{includeCode: true}
-function run(programa) {
-  return evaluate(parse(programa), Object.create(topScope));
+function run(program) {
+  return evaluate(parse(program), Object.create(topScope));
 }
 ```
 
-{{index "Object.create function", prototype}}
+{{index "función Object.create", prototipo}}
 
-We'll use object prototype chains to represent nested scopes, so that
-the program can add bindings to its local scope without changing the
-top-level scope.
+Usareomos las cadenas de prototipos de los objetos para representar
+ámbitos anidados, para que el programa pueda añadir asignaciones a su
+ámbito local sin cambiar el ámbito superior.
 
 ```
 run(`
-hacer(definir(total, 0),
-   definir(count, 1),
+do(define(total, 0),
+   define(count, 1),
    while(<(count, 11),
-         hacer(definir(total, +(total, count)),
-            definir(count, +(count, 1)))),
-   imprimir(total))
+         do(define(total, +(total, count)),
+            define(count, +(count, 1)))),
+   print(total))
 `);
 // → 55
 ```
 
-{{index "summing example", "Egg language"}}
+{{index "ejemplo de suma", "lenguaje Egg"}}
 
-This is the program we've seen several times before, which computes
-the sum of the numbers 1 to 10, expressed in Egg. It is clearly uglier
-than the equivalent JavaScript program—but not bad for a language
-implemented in less than 150 ((lines of code)).
+Este es el programa que hemos visto varias veces antes, que calcula la suma
+de los números del 1 a 10, expresado en Egg. Es claramente más
+feo que su equivalente en JavaScript, peror no está tan mal para
+un lenguaje implementado en menos de 150 ((líneas de código)).
+
 
 {{id egg_fun}}
 
-## Functions
+## Funciones
 
-{{index function, "Egg language"}}
+{{index función, "lenguaje Egg"}}
 
-A programming language without functions is a poor programming
-language indeed.
+Un lenguaje de programación sin funciones es un lenguaje de
+programación pobre, en efecto.
 
-Fortunately, it isn't hard to add a `fun` construct, which treats its
-last argument as the function's body and uses all arguments before
-that as the names of the function's parameters.
+Afortunadamente, no es difícil agregar un constructo `fun`,
+que trate su último argumento como el cuerpo de la función y use
+todos los argumentos antes de ese como los parámetros de la función.
+
 
 ```{includeCode: true}
 specialForms.fun = (args, scope) => {
@@ -596,56 +599,59 @@ do(define(pow, fun(base, exp,
 // → 1024
 ```
 
-## Compilation
+## Compilación
 
-{{index interpretation, compilation}}
+{{index interpretación, compilación}}
 
-What we have built is an interpreter. During evaluation, it acts
-directly on the representation of the program produced by the parser.
+Lo que hemos construido es un intérprete. Durante la evaluación, actúa
+directamente en la representación del programa producido por el
+parseador.
 
-{{index efficiency, performance}}
 
-_Compilation_ is the process of adding another step between the
-parsing and the running of a program, which transforms the program
-into something that can be evaluated more efficiently by doing as much
-work as possible in advance. For example, in well-designed languages
-it is obvious, for each use of a ((binding)), which binding is being
-referred to, without actually running the program. This can be used to
-avoid looking up the binding by name every time it is accessed,
-instead directly fetching it from some predetermined ((memory))
-location.
+{{index eficiencia, rendimiento}}
 
-Traditionally, ((compilation)) involves converting the program to
-((machine code)), the raw format that a computer's processor can
-execute. But any process that converts a program to a different
-representation can be thought of as compilation.
+La _Compilación_ es el proceso de añadir otro paso entre la lectura
+del programa y su ejecución, que transforma el programa en algo que
+pueda ser evaluado más eficientemente, haciendo la mayor cantidad
+de trabajo posible por adelantado. Por ejemplo, en lenguajes bien
+diseñados es obvio, para cada uso de una ((asignación)), a qué asignación
+te estás refiriendo, sin correr el programa. Esto puede ser usado para
+evitar buscar la asociación por nombbre cada vez que se usa, y, en vez de eso,
+traer directamente el valor de una locación predeterminada de
+((memoria)).
 
-{{index simplicity, "Function constructor", transpilation}}
+Tradicionalmente, la ((compilación)) implica convertir el programa
+en ((código máquina)), el formato crudo que el procesador de la computadora
+puede ejecutar. Pero puedes pensar en compilación como cualquier proceso
+que convierta un programa en una representación diferente.
 
-It would be possible to write an alternative ((evaluation)) strategy
-for Egg, one that first converts the program to a JavaScript program,
-uses `Function` to invoke the JavaScript compiler on it, and then runs
-the result. When done right, this would make Egg run very fast while
-still being quite simple to implement.
+{{index simplicidad, "función constructor", transpilación}}
 
-If you are interested in this topic and willing to spend some time on
-it, I encourage you to try to implement such a compiler as an
-exercise.
+Sería posible escribir una estrategia de ((evaluación)) alternativa
+para Egg, una que primero convierrta el programa a uno de JavaScript,
+usa `Function` para invocar el compilador de JavaSctipt, y después correr
+el resultado. Cuando se hace correctamente, esto haría que Egg
+corrra muy rápiddo mientras todavía sigue siendo simple implementarlo.
 
-## Cheating
+Si estás interesado en este tema y dispuesto a gastar algo de tiempo,
+te animo a que trates de implementar el compilador como ejercicio.
 
-{{index "Egg language"}}
+## Haciendo trampa
 
-When we defined `if` and `while`, you probably noticed that they were
-more or less trivial wrappers around JavaScript's own `if` and
-`while`. Similarly, the values in Egg are just regular old JavaScript
-values.
+{{index "lenguaje Egg"}}
 
-If you compare the implementation of Egg, built on top of JavaScript,
-with the amount of work and complexity required to build a programming
-language directly on the raw functionality provided by a machine, the
-difference is huge. Regardless, this example hopefully gave you an
-impression of the way ((programming language))s work.
+Cuando definimos `id` y `while`, probablemente te diste cuenta de que son
+más o menos envoltorios triviales alrededor de los `if` y `while` de
+JavaScript. Similarmente, los valores en Egg son solo valores de
+JavaScript comunes.
+
+Si comparas la implementación de Egg, construida soobre JavaScript,
+con la cantidad de trabajo y complejidad requerida para
+construir un lenguaje de programación directamente en la funcionalidad
+pura y cruda provista por una máquina, la diferencia es grande. Sin embargo,
+con suerte este ejemplo te dio un vistazo de la forma en
+que un ((lenguaje de programación)) funciona.
+
 
 And when it comes to getting something done, cheating is more
 effective than doing everything yourself. Though the toy language in
