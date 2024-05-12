@@ -137,22 +137,19 @@ para cada una, es un buen elemento para nuestro sistema.
 
 {{index "skill-sharing project", [interface, HTTP]}}
 
-Before we start designing either the server or the client, let's think
-about the point where they touch: the ((HTTP)) interface over
-which they communicate.
+Antes de comenzar a diseñar ya sea el servidor o el cliente, pensemos en el punto donde se conectan: la interfaz ((HTTP)) a través de la cual se comunican.
 
 {{index [path, URL], [method, HTTP]}}
 
-We will use ((JSON)) as the format of our request and response body.
-Like in the file server from [Chapter ?](node#file_server), we'll try
-to make good use of HTTP methods and ((header))s. The interface is
-centered around the `/talks` path. Paths that do not start with
-`/talks` will be used for serving ((static file))s—the HTML and
-JavaScript code for the client-side system.
+Utilizaremos ((JSON)) como formato de cuerpo de solicitud y respuesta. 
+Al igual que en el servidor de archivos del [Chapter ?](node#file_server), intentaremos 
+hacer un buen uso de los métodos HTTP y los ((encabezados)). La interfaz se centra 
+en la ruta `/talks`. Las rutas que no comiencen con `/talks` se utilizarán para servir 
+((archivos estáticos)) - el código HTML y JavaScript para el sistema del lado del cliente.
 
 {{index "GET method"}}
 
-A `GET` request to `/talks` returns a JSON document like this:
+Una solicitud `GET` a `/talks` retorna un documento JSON como este:
 
 ```{lang: "application/json"}
 [{"title": "Unituning",
@@ -163,10 +160,10 @@ A `GET` request to `/talks` returns a JSON document like this:
 
 {{index "PUT method", URL}}
 
-Creating a new talk is done by making a `PUT` request to a URL like
-`/talks/Unituning`, where the part after the second slash is the title
-of the talk. The `PUT` request's body should contain a ((JSON)) object
-that has `presenter` and `summary` properties.
+Crear una nueva charla se realiza haciendo una solicitud `PUT` a una URL como 
+`/talks/Unituning`, donde la parte después de la segunda barra diagonal es el título 
+de la charla. El cuerpo de la solicitud `PUT` debe contener un objeto ((JSON)) 
+que tenga las propiedades `presenter` y `summary`.
 
 {{index "encodeURIComponent function", [escaping, "in URLs"], [whitespace, "in URLs"]}}
 
